@@ -1,6 +1,5 @@
 import express from 'express';
 import ComfyUIController from '../controllers/comfy.js';
-import { generateImage } from '../controllers/test.js';
 const router = express.Router();
 
 const comfyClient = new ComfyUIController();

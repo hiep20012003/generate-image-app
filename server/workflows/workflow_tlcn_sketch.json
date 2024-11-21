@@ -14,7 +14,7 @@
         26
       ],
       "flags": {},
-      "order": 7,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -267,45 +267,6 @@
       "widgets_values": []
     },
     {
-      "id": 12,
-      "type": "LoadImage",
-      "pos": [
-        -277,
-        734
-      ],
-      "size": [
-        315,
-        314
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            11,
-            45
-          ],
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "png-clipart-living-room-couch-drawing-interior-design-services-house-sketch-angle-furniture-thumbnail.png",
-        "image"
-      ]
-    },
-    {
       "id": 32,
       "type": "VAELoader",
       "pos": [
@@ -317,7 +278,7 @@
         58
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -412,45 +373,6 @@
       }
     },
     {
-      "id": 5,
-      "type": "CLIPTextEncode",
-      "pos": [
-        184,
-        555
-      ],
-      "size": [
-        400,
-        200
-      ],
-      "flags": {},
-      "order": 13,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 52
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "links": [
-            24
-          ],
-          "slot_index": 0
-        }
-      ],
-      "title": "negative",
-      "properties": {
-        "Node name for S&R": "CLIPTextEncode"
-      },
-      "widgets_values": [
-        "ugly, deformed, sketch, embedding:bad-artist, embedding:bad-architecture, embedding:bad-interior"
-      ]
-    },
-    {
       "id": 29,
       "type": "CR Load LoRA",
       "pos": [
@@ -510,45 +432,6 @@
       ]
     },
     {
-      "id": 4,
-      "type": "CLIPTextEncode",
-      "pos": [
-        172,
-        294
-      ],
-      "size": [
-        400,
-        200
-      ],
-      "flags": {},
-      "order": 14,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 53
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "links": [
-            23
-          ],
-          "slot_index": 0
-        }
-      ],
-      "title": "positive",
-      "properties": {
-        "Node name for S&R": "CLIPTextEncode"
-      },
-      "widgets_values": [
-        "high-resolution details, highly detailed, ultra-realistic, furniture, Japanese Interior"
-      ]
-    },
-    {
       "id": 27,
       "type": "LineArtPreprocessor",
       "pos": [
@@ -560,7 +443,7 @@
         82
       ],
       "flags": {},
-      "order": 5,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -637,7 +520,7 @@
         "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        831922288848233,
+        391897614673580,
         "randomize",
         50,
         7,
@@ -716,6 +599,122 @@
       ]
     },
     {
+      "id": 30,
+      "type": "CLIPSetLastLayer",
+      "pos": [
+        -1020,
+        461
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 65
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            64
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPSetLastLayer"
+      },
+      "widgets_values": [
+        -1
+      ]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        184,
+        555
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 52
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            24
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "negative",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "ugly, deformed, sketch, bad artist, bad architecture, bad interior"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        172,
+        294
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 53
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            23
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "positive",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "high-resolution details, highly detailed, ultra-realistic, furniture, Japanese Interior"
+      ]
+    },
+    {
       "id": 35,
       "type": "CR Load LoRA",
       "pos": [
@@ -770,47 +769,48 @@
       },
       "widgets_values": [
         "On",
-        "luxury_interior_lora.safetensors",
+        "japanese_interior_lora.safetensors",
         0.7000000000000001,
         0.7000000000000001
       ]
     },
     {
-      "id": 30,
-      "type": "CLIPSetLastLayer",
+      "id": 12,
+      "type": "LoadImage",
       "pos": [
-        -1020,
-        461
+        -277,
+        734
       ],
       "size": [
         315,
-        58
+        314
       ],
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 65
-        }
-      ],
+      "inputs": [],
       "outputs": [
         {
-          "name": "CLIP",
-          "type": "CLIP",
+          "name": "IMAGE",
+          "type": "IMAGE",
           "links": [
-            64
+            11,
+            45
           ],
           "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
         }
       ],
       "properties": {
-        "Node name for S&R": "CLIPSetLastLayer"
+        "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        -1
+        "png-clipart-living-room-couch-drawing-interior-design-services-house-sketch-angle-furniture-thumbnail.png",
+        "image"
       ]
     }
   ],
@@ -1020,10 +1020,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.8264462809917358,
+      "scale": 0.7513148009015777,
       "offset": [
-        1506.0905869915528,
-        -71.83833342639967
+        1226.2153419957176,
+        -261.81083705339324
       ]
     }
   },

@@ -37,6 +37,8 @@ cd /home/ubuntu/ComfyUI/models/vae
 wget https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
 
 
+pip install --upgrade setuptools pip
+
 # Tạo script khởi chạy ComfyUI
 echo "cd /home/ubuntu/ComfyUI && source activate pytorch && python3 main.py --listen 0.0.0.0 --port 8188" > /home/ubuntu/start_comfyui.sh
 chmod +x /home/ubuntu/start_comfyui.sh
