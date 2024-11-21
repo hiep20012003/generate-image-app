@@ -1,0 +1,249 @@
+{
+  "1": {
+    "inputs": {
+      "seed": 831922288848233,
+      "steps": 50,
+      "cfg": 7,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "35",
+        0
+      ],
+      "positive": [
+        "16",
+        0
+      ],
+      "negative": [
+        "16",
+        1
+      ],
+      "latent_image": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "3": {
+    "inputs": {
+      "ckpt_name": "interiordesignsuperm_v2.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text": "high-resolution details, highly detailed, ultra-realistic, furniture",
+      "clip": [
+        "35",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "positive"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": "ugly, deformed, sketch, embedding:bad-artist, embedding:bad-architecture, embedding:bad-interior",
+      "clip": [
+        "35",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "negative"
+    }
+  },
+  "6": {
+    "inputs": {
+      "samples": [
+        "1",
+        0
+      ],
+      "vae": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "12": {
+    "inputs": {
+      "image": "png-clipart-living-room-couch-drawing-interior-design-services-house-sketch-angle-furniture-thumbnail.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "13": {
+    "inputs": {
+      "pixels": [
+        "12",
+        0
+      ],
+      "vae": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "14": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_lineart.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "16": {
+    "inputs": {
+      "strength": 0.7000000000000001,
+      "start_percent": 0,
+      "end_percent": 0.7000000000000001,
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "control_net": [
+        "14",
+        0
+      ],
+      "image": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "19": {
+    "inputs": {
+      "images": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "27": {
+    "inputs": {
+      "coarse": "disable",
+      "resolution": 1024,
+      "image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "LineArtPreprocessor",
+    "_meta": {
+      "title": "Realistic Lineart"
+    }
+  },
+  "28": {
+    "inputs": {
+      "upscale_method": "bislerp",
+      "width": 768,
+      "height": 512,
+      "crop": "center",
+      "samples": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "LatentUpscale",
+    "_meta": {
+      "title": "Upscale Latent"
+    }
+  },
+  "29": {
+    "inputs": {
+      "switch": "On",
+      "lora_name": "furniture_v10.safetensors",
+      "strength_model": 0.7000000000000001,
+      "strength_clip": 0.7000000000000001,
+      "model": [
+        "3",
+        0
+      ],
+      "clip": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "CR Load LoRA",
+    "_meta": {
+      "title": "💊 CR Load LoRA"
+    }
+  },
+  "30": {
+    "inputs": {
+      "stop_at_clip_layer": -1,
+      "clip": [
+        "3",
+        1
+      ]
+    },
+    "class_type": "CLIPSetLastLayer",
+    "_meta": {
+      "title": "CLIP Set Last Layer"
+    }
+  },
+  "32": {
+    "inputs": {
+      "vae_name": "vae-ft-mse-840000-ema-pruned.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "35": {
+    "inputs": {
+      "switch": "On",
+      "lora_name": "luxury_interior_lora.safetensors",
+      "strength_model": 0.7000000000000001,
+      "strength_clip": 0.7000000000000001,
+      "model": [
+        "29",
+        0
+      ],
+      "clip": [
+        "29",
+        1
+      ]
+    },
+    "class_type": "CR Load LoRA",
+    "_meta": {
+      "title": "load lora"
+    }
+  }
+}
