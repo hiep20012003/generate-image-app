@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { TextField, IconButton, Box, Typography, Paper, Grid2 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useSelector } from "react-redux";
 import { useDropzone } from 'react-dropzone';
 
 function UploadImageZone({ fileBase64, onChange, ...props }) {
     const [image, setImage] = useState(null);
+    const { isLoading } = useSelector((state) => state.ui);
 
     useEffect(() => {
         if (fileBase64) {
@@ -89,6 +91,7 @@ function UploadImageZone({ fileBase64, onChange, ...props }) {
                             '&:hover': { boxShadow: '0 0 4px #d3d3d3', background: '#dddddd', color: 'black' },
                         }}
                         aria-label="delete"
+                        disabled={isLoading}
                     >
                         <DeleteIcon fontSize="inherit" />
                     </IconButton>

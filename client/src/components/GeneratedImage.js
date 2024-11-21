@@ -10,15 +10,14 @@ import {
 } from "@mui/material";
 import PhotoIcon from "@mui/icons-material/Photo";
 import { useSelector } from "react-redux";
-import ui from "../reducers/loading";
 
 const GeneratedImage = () => {
   const { image } = useSelector((state) => state.comfy);
   const { isLoading } = useSelector((state) => state.ui);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
-  const handleDownload = (e) => {};
+  const handleDownload = (e) => { };
 
   return (
     <Paper raised elevation={6} sx={{ height: "100%" }}>

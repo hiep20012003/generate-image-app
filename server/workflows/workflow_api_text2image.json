@@ -1,9 +1,9 @@
 {
   "1": {
     "inputs": {
-      "seed": 554043430635540,
-      "steps": 50,
-      "cfg": 8,
+      "seed": 19831360840408,
+      "steps": 25,
+      "cfg": 7,
       "sampler_name": "dpmpp_2m",
       "scheduler": "karras",
       "denoise": 1,
@@ -53,7 +53,7 @@
   },
   "4": {
     "inputs": {
-      "text": "ugly, deformed, embedding:bad-artist, embedding:bad-architecture, embedding:bad-interior",
+      "text": "ugly, deformed, bad artist, bad architecture, bad interior",
       "clip": [
         "48",
         1
@@ -105,7 +105,7 @@
   },
   "18": {
     "inputs": {
-      "stop_at_clip_layer": -1,
+      "stop_at_clip_layer": -2,
       "clip": [
         "2",
         1
@@ -129,8 +129,8 @@
     "inputs": {
       "switch": "On",
       "lora_name": "furniture_v10.safetensors",
-      "strength_model": 0.7,
-      "strength_clip": 0.7,
+      "strength_model": 0.7000000000000001,
+      "strength_clip": 0.7000000000000001,
       "model": [
         "2",
         0
@@ -148,9 +148,9 @@
   "48": {
     "inputs": {
       "switch": "On",
-      "lora_name": "minimalist_interior_lora.safetensors",
-      "strength_model": 0.7,
-      "strength_clip": 0.7,
+      "lora_name": "japanese_interior_lora.safetensors",
+      "strength_model": 0.7000000000000001,
+      "strength_clip": 0.7000000000000001,
       "model": [
         "47",
         0

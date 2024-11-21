@@ -1,7 +1,7 @@
 {
   "1": {
     "inputs": {
-      "seed": 831922288848233,
+      "seed": 391897614673580,
       "steps": 50,
       "cfg": 7,
       "sampler_name": "dpmpp_2m",
@@ -53,7 +53,7 @@
   },
   "5": {
     "inputs": {
-      "text": "ugly, deformed, sketch, embedding:bad-artist, embedding:bad-architecture, embedding:bad-interior",
+      "text": "ugly, deformed, sketch, bad artist, bad architecture, bad interior",
       "clip": [
         "35",
         1
@@ -229,7 +229,7 @@
   "35": {
     "inputs": {
       "switch": "On",
-      "lora_name": "luxury_interior_lora.safetensors",
+      "lora_name": "japanese_interior_lora.safetensors",
       "strength_model": 0.7000000000000001,
       "strength_clip": 0.7000000000000001,
       "model": [
