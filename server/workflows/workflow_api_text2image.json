@@ -128,7 +128,7 @@
   "47": {
     "inputs": {
       "switch": "On",
-      "lora_name": "furniture_v10.safetensors",
+      "lora_name": "interior.safetensors",
       "strength_model": 0.7000000000000001,
       "strength_clip": 0.7000000000000001,
       "model": [
