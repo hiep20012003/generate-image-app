@@ -28,6 +28,7 @@ const Sketch2Image = () => {
     negative: "",
     style: interiorStyle[0].value,
     image: {},
+    client_id: localStorage.getItem("client_id"),
   });
 
   const handleGenerateClick = (e) => {

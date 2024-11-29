@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/comfy', comfyRoutes);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 80;
 const COMFY_UI_PORT = process.env.COMFY_UI_PORT || 8188;
 const SERVER_ADDRESS = process.env.SERVER_ADDRESS || 'localhost';
 const COMFY_UI_ADDRESS = process.env.COMFY_UI_ADDRESS || 'localhost';
