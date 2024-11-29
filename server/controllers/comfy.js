@@ -175,7 +175,6 @@ class ComfyUIController {
       await this.trackProgress( client_id, COMFY_UI_TEXT_PORT ,prompt, prompt_id);
       const history = await this.getHistory(COMFY_UI_TEXT_PORT, prompt_id);
       const images = await this.getImages(COMFY_UI_TEXT_PORT,history);
-      console.log(images);
       return res.json({ img: Object.values(images)[0][0] });
     } catch (error) {
       return res.status(400).send(error);
