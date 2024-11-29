@@ -597,7 +597,7 @@
       },
       "widgets_values": [
         "On",
-        "furniture_v10.safetensors",
+        "interior.safetensors",
         0.7000000000000001,
         0.7000000000000001
       ]
