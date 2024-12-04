@@ -11,7 +11,7 @@ const COMFY_UI_TEXT_PORT = process.env.COMFY_UI_TEXT_PORT || 8188;
 const COMFY_UI_SKETCH_PORT = process.env.COMFY_UI_SKETCH_PORT || 8189;
 const COMFY_UI_ADDRESS = process.env.COMFY_UI_ADDRESS || "localhost";
 
-const step = 25;
+const step = 30;
 // const loras = {
 //   neoclassic: {
 //     lora_name: "neoclassic_interior_lora.safetensors",
@@ -49,35 +49,39 @@ const loras = {
   neoclassic: {
     lora_name: "neoclassic_interior_lora.safetensors",
     trigger_words: "neoclassic",
-    prompt_style: "elegant, classical details, decorative moldings, luxurious, balanced symmetry, refined textures",
+    prompt_style:
+      "elegant, classical details, decorative moldings, luxurious, balanced symmetry, refined textures",
     clip_skip: 2,
   },
   japanese: {
     lora_name: "japanese_interior_lora.safetensors",
     trigger_words: "Japanese Interior",
-    prompt_style: "natural materials, harmonious, minimalist, earthy tones, traditional aesthetics, calming atmosphere",
+    prompt_style:
+      "natural materials, harmonious, minimalist, earthy tones, traditional aesthetics, calming atmosphere",
     clip_skip: 2,
   },
   luxury: {
     lora_name: "luxury_interior_lora.safetensors",
     trigger_words: "tfz_poliform",
-    prompt_style: "sophisticated, high-end finishes, modern elegance, premium materials, sleek and spacious design, opulent details",
+    prompt_style:
+      "sophisticated, high-end finishes, modern elegance, premium materials, sleek and spacious design, opulent details",
     clip_skip: 2,
   },
   minimalist: {
     lora_name: "minimalist_interior_lora.safetensors",
     trigger_words: "archminimalist",
-    prompt_style: "clean lines, open and airy, simplicity, neutral palette, functional design, uncluttered aesthetic",
+    prompt_style:
+      "clean lines, open and airy, simplicity, neutral palette, functional design, uncluttered aesthetic",
     clip_skip: 2,
   },
   indochine: {
     lora_name: "indochine_interior_lora.safetensors",
     trigger_words: "indochine",
-    prompt_style: "warm wood tones, tropical elements, intricate patterns, cultural fusion, antique accents, rich textures",
+    prompt_style:
+      "warm wood tones, tropical elements, intricate patterns, cultural fusion, antique accents, rich textures",
     clip_skip: 2,
   },
 };
-
 
 class ComfyUIController {
   constructor() {
@@ -98,10 +102,10 @@ class ComfyUIController {
       if (!this.sessions[clientId]) {
         this.sessions[clientId] = {};
       }
-      if(!this.sessions[clientId][port]) {
+      if (!this.sessions[clientId][port]) {
         let ws = new WebSocket(`ws://${COMFY_UI_ADDRESS}:${port}/ws`);
 
-        this.sessions[clientId][port] = {ws, isLoading: false};
+        this.sessions[clientId][port] = { ws, isLoading: false };
         ws.on("open", () => {
           console.log(`WebSocket connected for client: ${clientId}`);
         });
@@ -114,10 +118,9 @@ class ComfyUIController {
         ws.on("message", (message) => this.handleMessage(clientId, message));
       }
       return clientId; // Trả về clientId để sử dụng
-      }
-      catch (error) {
-        console.error(error);
-      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   handleMessage(clientId, message) {
@@ -158,19 +161,26 @@ class ComfyUIController {
   }
 
   async generateImageByText(req, res) {
-    const { client_id,...inputs} = req.body;
+    const { client_id, ...inputs } = req.body;
     try {
       await this.connect(client_id, COMFY_UI_TEXT_PORT);
       const prompt = await this.promptImageByText(
         this.workflow.text2image,
         inputs,
       );
-      const {
-        prompt_id
-      } = await this.getQueuePrompt(COMFY_UI_TEXT_PORT ,prompt, client_id);
-      await this.trackProgress( client_id, COMFY_UI_TEXT_PORT ,prompt, prompt_id);
+      const { prompt_id } = await this.getQueuePrompt(
+        COMFY_UI_TEXT_PORT,
+        prompt,
+        client_id,
+      );
+      await this.trackProgress(
+        client_id,
+        COMFY_UI_TEXT_PORT,
+        prompt,
+        prompt_id,
+      );
       const history = await this.getHistory(COMFY_UI_TEXT_PORT, prompt_id);
-      const images = await this.getImages(COMFY_UI_TEXT_PORT,history);
+      const images = await this.getImages(COMFY_UI_TEXT_PORT, history);
       return res.json({ img: Object.values(images)[0][0] });
     } catch (error) {
       return res.status(400).send(error);
@@ -229,24 +239,35 @@ class ComfyUIController {
   }
 
   async generateImageBySketch(req, res) {
-    const {client_id,...inputs} = req.body;
+    const { client_id, ...inputs } = req.body;
     try {
       await this.connect(client_id, COMFY_UI_SKETCH_PORT);
       const buffer = Buffer.from(
         String(inputs.image.image).split(",")[1],
         "base64",
       );
-      const result = await this.uploadImage(COMFY_UI_SKETCH_PORT,buffer, inputs.image.name);
+      const result = await this.uploadImage(
+        COMFY_UI_SKETCH_PORT,
+        buffer,
+        inputs.image.name,
+      );
       const prompt = await this.promptImageBySketch(
         this.workflow.sketch2image,
         inputs,
       );
-      const {
+      const { prompt_id } = await this.getQueuePrompt(
+        COMFY_UI_SKETCH_PORT,
+        prompt,
+        client_id,
+      );
+      await this.trackProgress(
+        client_id,
+        COMFY_UI_SKETCH_PORT,
+        prompt,
         prompt_id,
-      } = await this.getQueuePrompt(COMFY_UI_SKETCH_PORT,prompt, client_id);
-      await this.trackProgress(client_id, COMFY_UI_SKETCH_PORT, prompt, prompt_id);
-      const history = await this.getHistory(COMFY_UI_SKETCH_PORT,prompt_id);
-      const images = await this.getImages(COMFY_UI_SKETCH_PORT,history);
+      );
+      const history = await this.getHistory(COMFY_UI_SKETCH_PORT, prompt_id);
+      const images = await this.getImages(COMFY_UI_SKETCH_PORT, history);
       return res.status(200).json({ img: Object.values(images)[0][0] });
     } catch (error) {
       return res.status(400).send(error);
@@ -262,7 +283,6 @@ class ComfyUIController {
           // const seed = Math.floor(Math.random() * 9e14) + 1e14;
           // sketch2imagePrompt[key]["inputs"]["seed"] = seed;
           sketch2imagePrompt[key]["inputs"]["steps"] = step;
-
         }
         if (value.class_type === "CLIPTextEncode") {
           if (value?._meta?.title === "negative") {
@@ -314,30 +334,30 @@ class ComfyUIController {
     }
   }
 
-  async getHistory(port,prompt_id) {
+  async getHistory(port, prompt_id) {
     try {
-      const { data } = await comfyApi.getHistory(port,prompt_id);
+      const { data } = await comfyApi.getHistory(port, prompt_id);
       return data[prompt_id];
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
-  async getImage(port,filename, subfolder, type) {
+  async getImage(port, filename, subfolder, type) {
     try {
       const params = new URLSearchParams({
         filename: filename,
         subfolder: subfolder,
         type: type,
       });
-      const { data } = await comfyApi.getView(port,params.toString());
+      const { data } = await comfyApi.getView(port, params.toString());
       return data;
     } catch (error) {
       throw new Error(error.message);
     }
   }
 
-  async getImages(port,history) {
+  async getImages(port, history) {
     const output = {};
     try {
       for (const nodeId in history.outputs) {
@@ -345,7 +365,8 @@ class ComfyUIController {
         if (nodeOutput.images) {
           const arr = [];
           for (const image of nodeOutput.images) {
-            const imageData = await this.getImage(port,
+            const imageData = await this.getImage(
+              port,
               image.filename,
               image.subfolder,
               image.type,
@@ -360,7 +381,13 @@ class ComfyUIController {
       throw new Error(error.message);
     }
   }
-  async uploadImage(port,buffer, filename, imageType = "input", overwrite = false) {
+  async uploadImage(
+    port,
+    buffer,
+    filename,
+    imageType = "input",
+    overwrite = false,
+  ) {
     const formData = new FormData();
     formData.append("image", buffer, {
       filename: filename,
@@ -370,7 +397,7 @@ class ComfyUIController {
     formData.append("overwrite", overwrite.toString().toLowerCase());
 
     try {
-      const { data } = await comfyApi.uploadImage(port,formData);
+      const { data } = await comfyApi.uploadImage(port, formData);
       return data;
     } catch (error) {
       throw new Error(error.message);
@@ -380,7 +407,7 @@ class ComfyUIController {
   async trackProgress(clientId, port, prompt, promptId) {
     const session = this.sessions[clientId][port];
     // if (!session) throw new Error(`No active session for client: ${clientId}`);
-    if (!session) console.log('error');
+    if (!session) console.log("error");
     const ws = session.ws;
     session.isLoading = true;
 
@@ -416,7 +443,6 @@ class ComfyUIController {
       ws.on("message", messageHandler);
     });
   }
-
 }
 
 export default ComfyUIController;
