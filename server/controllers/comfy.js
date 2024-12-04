@@ -11,7 +11,7 @@ const COMFY_UI_TEXT_PORT = process.env.COMFY_UI_TEXT_PORT || 8188;
 const COMFY_UI_SKETCH_PORT = process.env.COMFY_UI_SKETCH_PORT || 8189;
 const COMFY_UI_ADDRESS = process.env.COMFY_UI_ADDRESS || "localhost";
 
-const step = 50;
+const step = 25;
 const loras = {
   neoclassic: {
     lora_name: "neoclassic_interior_lora.safetensors",
@@ -22,7 +22,7 @@ const loras = {
   japanese: {
     lora_name: "japanese_interior_lora.safetensors",
     trigger_words: "Japanese Interior",
-    prompt_style: "minimal, serene, natural materials",
+    prompt_style: "minimal, serene, natural materials, wood, traditional japanese",
     clip_skip: 1,
   },
   luxury: {
