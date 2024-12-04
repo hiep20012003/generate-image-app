@@ -25,7 +25,7 @@ export const generateImageByText = createAsyncThunk(
         formData,
         cancelTokenSource.token,
       );
-      return data?.img;
+      return data;
     } catch (error) {
       if (axios.isCancel(error)) {
         return rejectWithValue("Request canceled");
@@ -53,7 +53,7 @@ export const generateImageBySketch = createAsyncThunk(
         formData,
         cancelTokenSource.token,
       );
-      return data?.img;
+      return data;
     } catch (error) {
       if (axios.isCancel(error)) {
         return rejectWithValue("Request canceled");

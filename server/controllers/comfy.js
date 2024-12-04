@@ -2,10 +2,9 @@ import WebSocket from "ws";
 import fs from "fs";
 import FormData from "form-data";
 import { v4 as uuidv4 } from "uuid";
-import sharp from "sharp";
 import dotenv from "dotenv";
 dotenv.config();
-import * as comfyApi from "../apis/comfyEndpointApi.js";
+import * as comfyApi from "../services/comfyEndpointApi.js";
 
 const COMFY_UI_TEXT_PORT = process.env.COMFY_UI_TEXT_PORT || 8188;
 const COMFY_UI_SKETCH_PORT = process.env.COMFY_UI_SKETCH_PORT || 8189;
@@ -181,7 +180,7 @@ class ComfyUIController {
       );
       const history = await this.getHistory(COMFY_UI_TEXT_PORT, prompt_id);
       const images = await this.getImages(COMFY_UI_TEXT_PORT, history);
-      return res.json({ img: Object.values(images)[0][0] });
+      return res.status(200).send(Object.values(images)[0][0]);
     } catch (error) {
       return res.status(400).send(error);
     }
@@ -268,7 +267,7 @@ class ComfyUIController {
       );
       const history = await this.getHistory(COMFY_UI_SKETCH_PORT, prompt_id);
       const images = await this.getImages(COMFY_UI_SKETCH_PORT, history);
-      return res.status(200).json({ img: Object.values(images)[0][0] });
+      return res.status(200).send(Object.values(images)[0][0]);
     } catch (error) {
       return res.status(400).send(error);
     }
