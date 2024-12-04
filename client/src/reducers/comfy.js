@@ -28,7 +28,10 @@ const comfySlice = createSlice({
             image: action.payload,
           };
         },
-      );
+      )
+      .addCase(actionTypes.CANCEL_REQUEST, (state, action) => {
+        return { ...initialState };
+      })
   },
 });
 

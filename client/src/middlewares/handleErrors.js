@@ -1,4 +1,4 @@
-import { error, success } from "../reducers/alerts.js";
+import { error, success, info } from "../reducers/alerts.js";
 
 const alertMiddleware =
   ({ dispatch }) =>
@@ -9,6 +9,9 @@ const alertMiddleware =
     }
     if (action.type.endsWith("/fulfilled")) {
       dispatch(success({ message: "Successfully" }));
+    }
+    if (action.type.endsWith("CANCEL_REQUEST")) {
+      dispatch(info({ message: "Cancel Generate" }));
     }
     return next(action);
   };

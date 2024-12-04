@@ -29,3 +29,8 @@ export const generateImageBySketch = createAsyncThunk(
     }
   },
 );
+
+export const cancelRequest = (cancelTokenSource) => {
+  cancelTokenSource.cancel('Operation canceled by the user.');
+  return { type: actionTypes.CANCEL_REQUEST };
+};

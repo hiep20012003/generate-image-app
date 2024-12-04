@@ -37,6 +37,12 @@ const Text2Image = () => {
       dispatch(generateImageByText(formData));
     }
   };
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    if (isLoading) {
+      dispatch({ type: 'CANCEL_REQUEST' });
+    }
+  };
 
   return (
     <Container maxWidth="xl" sx={{ py: 4, height: "100%" }}>
@@ -117,6 +123,15 @@ const Text2Image = () => {
                 disabled={formData?.positive === "" || isLoading}
               >
                 Generate Image
+              </Button>
+              <Button
+                size="medium"
+                variant="contained"
+                color="secondary"
+                onClick={handleCancelClick}
+                disabled={!isLoading}
+              >
+                Cancel
               </Button>
             </Grid2>
           </Paper>
