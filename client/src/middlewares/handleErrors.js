@@ -5,13 +5,17 @@ const alertMiddleware =
   (next) =>
   (action) => {
     if (action.type.endsWith("/rejected")) {
-      dispatch(error({ message: "Has Error" }));
+      if (action.payload !== "Request canceled") {
+        dispatch(error({ message: "Has Errors" }));
+      }
     }
     if (action.type.endsWith("/fulfilled")) {
-      dispatch(success({ message: "Successfully" }));
+      if (action.payload !== "Request canceled") {
+        dispatch(success({ message: "Successfully" }));
+      }
     }
-    if (action.type.endsWith("CANCEL_REQUEST")) {
-      dispatch(info({ message: "Cancel Generate" }));
+    if (action.type.endsWith("CANCEL_REQUEST/fulfilled")) {
+      dispatch(info({ message: "Canceled" }));
     }
     return next(action);
   };

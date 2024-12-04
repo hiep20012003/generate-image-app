@@ -29,7 +29,7 @@ const comfySlice = createSlice({
           };
         },
       )
-      .addCase(actionTypes.CANCEL_REQUEST, (state, action) => {
+      .addCase(`${actionTypes.CANCEL_REQUEST}/fulfilled`, (state, action) => {
         return { ...initialState };
       })
   },

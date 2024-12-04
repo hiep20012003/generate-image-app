@@ -11,7 +11,7 @@ import {
   FormLabel,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { generateImageBySketch } from "../actions/comfy.js";
+import {cancelGenerate, generateImageBySketch} from "../actions/comfy.js";
 import GeneratedImage from "../components/GeneratedImage.js";
 import { sizes } from "../constants/imageSizes.js";
 import UploadImageZone from "../components/UploadImageZone.js";
@@ -42,7 +42,8 @@ const Sketch2Image = () => {
   const handleCancelClick = (e) => {
     e.preventDefault();
     if (isLoading) {
-      dispatch({ type: 'CANCEL_REQUEST' });
+      dispatch({ type: 'RESET_IMAGE' });
+      dispatch(cancelGenerate());
     }
   };
 
@@ -109,25 +110,29 @@ const Sketch2Image = () => {
                   setFormData({ ...formData, image: e });
                 }}
               />
-              <Button
-                size="large"
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={handleGenerateClick}
-                disabled={formData?.image?.name === undefined || isLoading}
-              >
-                Generate Image
-              </Button>
-              <Button
-                size="medium"
-                variant="contained"
-                color="secondary"
-                onClick={handleCancelClick}
-                disabled={!isLoading}
-              >
-                Cancel
-              </Button>
+              <Grid2 container spacing={1}>
+                <Button
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={handleGenerateClick}
+                  disabled={formData?.image?.name === undefined || isLoading}
+                  sx={{width: '100%'}}
+                >
+                  Generate Image
+                </Button>
+                <Button
+                  size="medium"
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleCancelClick}
+                  disabled={!isLoading}
+                  sx={{width: '100%'}}
+                >
+                  Cancel
+                </Button>
+              </Grid2>
             </Grid2>
           </Paper>
         </Grid2>
