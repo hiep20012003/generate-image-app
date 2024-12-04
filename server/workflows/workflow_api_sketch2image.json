@@ -31,7 +31,7 @@
   },
   "3": {
     "inputs": {
-      "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+      "ckpt_name": "interiordesignsuperm_v2.safetensors"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
