@@ -180,7 +180,7 @@ class ComfyUIController {
       );
       const history = await this.getHistory(COMFY_UI_TEXT_PORT, prompt_id);
       const images = await this.getImages(COMFY_UI_TEXT_PORT, history);
-      return res.status(200).send(Object.values(images)[0][0]);
+      return res.status(200).json({ img: Object.values(images)[0][0] });
     } catch (error) {
       return res.status(400).send(error);
     }
@@ -267,7 +267,7 @@ class ComfyUIController {
       );
       const history = await this.getHistory(COMFY_UI_SKETCH_PORT, prompt_id);
       const images = await this.getImages(COMFY_UI_SKETCH_PORT, history);
-      return res.status(200).send(Object.values(images)[0][0]);
+      return res.status(200).json({ img: Object.values(images)[0][0] });
     } catch (error) {
       return res.status(400).send(error);
     }
