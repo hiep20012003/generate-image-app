@@ -3,8 +3,8 @@
     "inputs": {
       "seed": 19831360840408,
       "steps": 25,
-      "cfg": 6.5,
-      "sampler_name": "dpmpp_sde",
+      "cfg": 7,
+      "sampler_name": "dpmpp_2m",
       "scheduler": "karras",
       "denoise": 1,
       "model": [
@@ -31,7 +31,7 @@
   },
   "2": {
     "inputs": {
-      "ckpt_name": "interiordesignsuperm_v2.safetensors"
+      "ckpt_name": "v1-5-pruned-emaonly.safetensors"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
