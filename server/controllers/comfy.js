@@ -184,7 +184,7 @@ class ComfyUIController {
       Object.entries(text2imagePrompt).forEach(([key, value]) => {
         if (value.class_type === "KSampler") {
           const seed = Math.floor(Math.random() * 9e14) + 1e14;
-          text2imagePrompt[key]["inputs"]["seed"] = seed;
+          // text2imagePrompt[key]["inputs"]["seed"] = seed;
           text2imagePrompt[key]["inputs"]["steps"] = step;
         }
         if (value.class_type === "EmptyLatentImage") {
@@ -260,7 +260,9 @@ class ComfyUIController {
       Object.entries(sketch2imagePrompt).forEach(([key, value]) => {
         if (value.class_type === "KSampler") {
           const seed = Math.floor(Math.random() * 9e14) + 1e14;
-          sketch2imagePrompt[key]["inputs"]["seed"] = seed;
+          // sketch2imagePrompt[key]["inputs"]["seed"] = seed;
+          sketch2imagePrompt[key]["inputs"]["steps"] = step;
+
         }
         if (value.class_type === "CLIPTextEncode") {
           if (value?._meta?.title === "negative") {
