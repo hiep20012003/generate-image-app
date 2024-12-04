@@ -12,77 +12,73 @@ const COMFY_UI_SKETCH_PORT = process.env.COMFY_UI_SKETCH_PORT || 8189;
 const COMFY_UI_ADDRESS = process.env.COMFY_UI_ADDRESS || "localhost";
 
 const step = 25;
-const loras = {
-  neoclassic: {
-    lora_name: "neoclassic_interior_lora.safetensors",
-    trigger_words: "neoclassic",
-    prompt_style: "elegant, classical, ornate, rich textures, symmetrical, vintage",
-    clip_skip: 1,
-  },
-  japanese: {
-    lora_name: "japanese_interior_lora.safetensors",
-    trigger_words: "Japanese Interior",
-    prompt_style: "minimal, serene, natural materials, traditional japanese",
-    clip_skip: 1,
-  },
-  luxury: {
-    lora_name: "luxury_interior_lora.safetensors",
-    trigger_words: "tfz_poliform",
-    prompt_style: "opulent, high-end, sleek, modern, lavish materials, designer furniture",
-    clip_skip: 1,
-  },
-  minimalist: {
-    lora_name: "minimalist_interior_lora.safetensors",
-    trigger_words: "archminimalist",
-    prompt_style: "clean lines, open space, neutral colors, functional, uncluttered, modern",
-    clip_skip: 1,
-  },
-  indochine: {
-    lora_name: "indochine_interior_lora.safetensors",
-    trigger_words: "indochine",
-    prompt_style: "exotic, vibrant, wood, tropical, antique accents, fusion of Eastern and Western elements",
-    clip_skip: 1,
-  },
-
-}
-
 // const loras = {
 //   neoclassic: {
 //     lora_name: "neoclassic_interior_lora.safetensors",
 //     trigger_words: "neoclassic",
-//     prompt_style:
-//       "A sophisticated and timeless design with ornate details, symmetrical layouts, luxurious materials, and neutral color palettes. Includes classical furniture and decorative elements.",
+//     prompt_style: "elegant, classical, ornate, rich textures, symmetrical, vintage",
 //     clip_skip: 1,
 //   },
 //   japanese: {
 //     lora_name: "japanese_interior_lora.safetensors",
 //     trigger_words: "Japanese Interior",
-//     prompt_style:
-//       "A serene and minimalist aesthetic focusing on natural materials like wood and paper, sliding doors, tatami mats, and harmonious color tones inspired by nature.",
+//     prompt_style: "minimal, serene, natural materials, traditional japanese",
 //     clip_skip: 1,
 //   },
 //   luxury: {
 //     lora_name: "luxury_interior_lora.safetensors",
 //     trigger_words: "tfz_poliform",
-//     prompt_style:
-//       "High-end and elegant interiors with premium materials such as marble, gold accents, plush fabrics, and designer furniture. Emphasis on grandeur and exclusivity.",
+//     prompt_style: "opulent, high-end, sleek, modern, lavish materials, designer furniture",
 //     clip_skip: 1,
 //   },
 //   minimalist: {
 //     lora_name: "minimalist_interior_lora.safetensors",
 //     trigger_words: "archminimalist",
-//     prompt_style:
-//       "A clean and simple design style with an emphasis on functionality, open spaces, and neutral color schemes. Features minimal decoration and sleek modern furniture.",
+//     prompt_style: "clean lines, open space, neutral colors, functional, uncluttered, modern",
 //     clip_skip: 1,
 //   },
 //   indochine: {
 //     lora_name: "indochine_interior_lora.safetensors",
 //     trigger_words: "indochine",
-//     prompt_style:
-//       "A unique blend Southeast Asian design.",
+//     prompt_style: "exotic, vibrant, wood, tropical, antique accents, fusion of Eastern and Western elements",
 //     clip_skip: 1,
 //   },
-// };
+// }
+
+const loras = {
+  neoclassic: {
+    lora_name: "neoclassic_interior_lora.safetensors",
+    trigger_words: "neoclassic",
+    prompt_style: "elegant, classical details, decorative moldings, luxurious, balanced symmetry, refined textures",
+    clip_skip: 1,
+  },
+  japanese: {
+    lora_name: "japanese_interior_lora.safetensors",
+    trigger_words: "Japanese Interior",
+    prompt_style: "natural materials, harmonious, minimalist, earthy tones, traditional aesthetics, calming atmosphere",
+    clip_skip: 1,
+  },
+  luxury: {
+    lora_name: "luxury_interior_lora.safetensors",
+    trigger_words: "tfz_poliform",
+    prompt_style: "sophisticated, high-end finishes, modern elegance, premium materials, sleek and spacious design, opulent details",
+    clip_skip: 1,
+  },
+  minimalist: {
+    lora_name: "minimalist_interior_lora.safetensors",
+    trigger_words: "archminimalist",
+    prompt_style: "clean lines, open and airy, simplicity, neutral palette, functional design, uncluttered aesthetic",
+    clip_skip: 1,
+  },
+  indochine: {
+    lora_name: "indochine_interior_lora.safetensors",
+    trigger_words: "indochine",
+    prompt_style: "warm wood tones, tropical elements, intricate patterns, cultural fusion, antique accents, rich textures",
+    clip_skip: 1,
+  },
+};
+
+
 class ComfyUIController {
   constructor() {
     this.sessions = {}; // Lưu trữ thông tin phiên với UUID làm key
