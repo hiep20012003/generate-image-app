@@ -11,7 +11,7 @@ import {
   FormLabel,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import {cancelGenerate, generateImageByText} from "../actions/comfy.js";
+import { cancelGenerate, generateImageByText } from "../actions/comfy.js";
 import GeneratedImage from "../components/GeneratedImage.js";
 import { sizes } from "../constants/imageSizes.js";
 import { interiorStyle } from "../constants/interiorStyle.js";
@@ -33,14 +33,14 @@ const Text2Image = () => {
     e.preventDefault();
     const checkRequired = formData?.positive !== "";
     if (checkRequired) {
-      dispatch({ type: 'RESET_IMAGE' });
+      dispatch({ type: "RESET_IMAGE" });
       dispatch(generateImageByText(formData));
     }
   };
   const handleCancelClick = (e) => {
     e.preventDefault();
     if (isLoading) {
-      dispatch({ type: 'RESET_IMAGE' });
+      dispatch({ type: "RESET_IMAGE" });
       dispatch(cancelGenerate());
     }
   };
@@ -123,17 +123,17 @@ const Text2Image = () => {
                   color="primary"
                   onClick={handleGenerateClick}
                   disabled={formData?.positive === "" || isLoading}
-                  sx={{width: '100%'}}
+                  sx={{ width: "100%" }}
                 >
                   Generate Image
                 </Button>
                 <Button
                   size="medium"
-                  variant="contained"
+                  variant="outlined"
                   color="secondary"
                   onClick={handleCancelClick}
                   disabled={!isLoading}
-                  sx={{width: '100%'}}
+                  sx={{ width: "100%" }}
                 >
                   Cancel
                 </Button>
