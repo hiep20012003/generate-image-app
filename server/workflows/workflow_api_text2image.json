@@ -53,7 +53,7 @@
   },
   "4": {
     "inputs": {
-      "text": "ugly, deformed, bad artist, bad architecture, bad interior",
+      "text": "ugly, deformed, bad artist, bad architecture, bad interior, watermark",
       "clip": [
         "48",
         1
