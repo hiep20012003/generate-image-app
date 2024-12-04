@@ -292,7 +292,7 @@ class ComfyUIController {
         if (value.class_type === "CLIPSetLastLayer") {
           if (loras.hasOwnProperty(style)) {
             sketch2imagePrompt[key]["inputs"]["stop_at_clip_layer"] =
-              -loras[style]?.clip_skip;
+              -loras[style]?.clip_skip + 1;
           }
         }
       });
