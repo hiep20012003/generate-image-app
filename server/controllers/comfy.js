@@ -74,7 +74,7 @@ const loras = {
     lora_name: "indochine_interior_lora.safetensors",
     trigger_words: "indochine",
     prompt_style: "warm wood tones, tropical elements, intricate patterns, cultural fusion, antique accents, rich textures",
-    clip_skip: 1,
+    clip_skip: 2,
   },
 };
 
