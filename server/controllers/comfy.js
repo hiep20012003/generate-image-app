@@ -22,7 +22,7 @@ const loras = {
   japanese: {
     lora_name: "japanese_interior_lora.safetensors",
     trigger_words: "Japanese Interior",
-    prompt_style: "minimal, serene, natural materials",
+    prompt_style: "a japanese style interior room design",
     clip_skip: 1,
   },
   luxury: {
