@@ -5,7 +5,8 @@ import bodyParser from "body-parser";
 import comfyRoutes from "./routes/comfy.js";
 import helmet from "helmet"; // Bảo mật
 import compression from "compression"; // Nén phản hồi HTTP
-import rateLimit from "express-rate-limit"; // Giới hạn tốc độ yêu cầu
+import cluster from "cluster"; // Import clustering
+import os from "os"; // Import os để lấy số lõi CPU
 
 const app = express();
 dotenv.config();
@@ -15,13 +16,6 @@ app.use(helmet());
 
 // Middleware nén phản hồi HTTP
 app.use(compression());
-
-// Giới hạn tốc độ yêu cầu từ client
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 phút
-  max: 100, // tối đa 100 yêu cầu trong 15 phút
-});
-app.use(limiter);
 
 // Cấu hình body-parser
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
