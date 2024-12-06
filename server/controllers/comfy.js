@@ -385,7 +385,7 @@ class ComfyUIController {
     buffer,
     filename,
     imageType = "input",
-    overwrite = false,
+    overwrite = true,
   ) {
     const formData = new FormData();
     formData.append("image", buffer, {
